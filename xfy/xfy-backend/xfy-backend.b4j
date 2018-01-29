@@ -1,0 +1,78 @@
+﻿Version=5.9
+AppType=StandardJava
+NumberOfModules=22
+Module1=FileUpload
+Module2=hello
+Module3=userlogin
+Module4=uploadText
+Module5=uploadTextPrivate
+Module6=viewTextListPrivate
+Module7=viewTextList
+Module8=comment
+Module9=viewComment
+Module10=uploadhomework
+Module11=workshopAdd
+Module12=workshopList
+Module13=getTaskDetail
+Module14=homeworkList
+Module15=getReview
+Module16=uploadReview
+Module17=submithomework
+Module18=homeworkDoneList
+Module19=addfavourite
+Module20=viewTextFileList
+Module21=viewfavourite
+Module22=viewText
+Build1=Default,b4j.example
+NumberOfFiles=0
+NumberOfLibraries=7
+Library1=jcore
+Library2=jserver
+Library3=jstringutils
+Library4=json
+Library5=jsql
+Library6=jokhttputils2
+Library7=archiver
+@EndOfDesignText@
+'Non-UI application (console / server application)
+#Region Project Attributes 
+	#CommandLineArgs:
+	#MergeLibraries: True 
+	#AdditionalJar: sqlite-jdbc-3.7.2
+#End Region
+
+Sub Process_Globals
+	Private srvr As Server
+End Sub
+
+Sub AppStart (Args() As String)
+	srvr.Initialize("srvr")
+	srvr.Port = 8888
+	srvr.StaticFilesFolder = File.Combine(File.DirApp, "homework")
+	srvr.LogsFileFolder = File.Combine(File.DirApp, "logs")	
+	srvr.AddHandler("/hello", "hello", False)
+	srvr.AddHandler("/FileUpload", "FileUpload", False)
+	srvr.AddHandler("/userlogin","userlogin",False)
+	srvr.AddHandler("/uploadText","uploadText",False)
+	srvr.AddHandler("/uploadTextPrivate","uploadTextPrivate",False)
+	srvr.AddHandler("/viewTextListPrivate","viewTextListPrivate",False)
+	srvr.AddHandler("/viewTextList","viewTextList",False)
+	srvr.AddHandler("/viewTextFileList","viewTextFileList",False)
+	srvr.AddHandler("/viewText","viewText",False)
+	srvr.AddHandler("/comment","comment",False)
+	srvr.AddHandler("/viewcomment","viewComment",False)
+	srvr.AddHandler("/addfavourite","addfavourite",False)
+	srvr.AddHandler("/viewfavourite","viewfavourite",False)
+	srvr.AddHandler("/uploadhomework","uploadhomework",False)
+	srvr.AddHandler("/submithomework","submithomework",False)
+	srvr.AddHandler("/homeworkList","homeworkList",False)
+	srvr.AddHandler("/homeworkDoneList","homeworkDoneList",False)
+	srvr.AddHandler("/uploadReview","uploadReview",False)
+	srvr.AddHandler("/getReview","getReview",False)
+	srvr.AddHandler("/workshopAdd","workshopAdd",False)
+	srvr.AddHandler("/workshopList","workshopList",False)
+	srvr.AddHandler("/getTaskDetail","getTaskDetail",False)
+	srvr.Start
+	Log("Server started")
+	StartMessageLoop
+End Sub

@@ -1,0 +1,120 @@
+﻿Version=5.9
+AppType=JavaFX
+NumberOfModules=17
+Module1=textList
+Module2=login
+Module3=viewContent
+Module4=viewStrategy
+Module5=viewTerms
+Module6=textListOnline
+Module7=viewContentOnline
+Module8=homeworkTeacher
+Module9=homeworkStudent
+Module10=viewHomeworkDoneList
+Module11=viewHomework
+Module12=workshop
+Module13=workshopParticipate
+Module14=viewTask
+Module15=HomeworkReview
+Module16=viewReview
+Module17=TaskTranslationEdit
+Build1=Default,com.xulihang.xfy.frontend
+NumberOfFiles=23
+File1=annotationList.bjl
+File2=HomeworkReview.bjl
+File3=homeworkStudent.bjl
+File4=homeworkTeacher.bjl
+File5=inputReplace.bjl
+File6=login.bjl
+File7=main.bjl
+File8=panel.bjl
+File9=setStyle.bjl
+File10=TaskTranslationEdit.bjl
+File11=TextArea.bjl
+File12=textList.bjl
+File13=viewContent.bjl
+File14=viewContentP.bjl
+File15=viewHomework.bjl
+File16=viewHomeworkDoneList.bjl
+File17=viewReview.bjl
+File18=viewStrategy.bjl
+File19=viewTask.bjl
+File20=viewTerms.bjl
+File21=WebView.bjl
+File22=workshop.bjl
+File23=workshopParticipate.bjl
+NumberOfLibraries=7
+Library1=jcore
+Library2=jfx
+Library3=apachestringutilsb4j
+Library4=javaobject
+Library5=json
+Library6=jokhttputils2
+Library7=archiver
+@EndOfDesignText@
+#Region Project Attributes 
+	#MainFormWidth: 600
+	#MainFormHeight: 400
+#End Region
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Private Button2 As Button
+	Private Button3 As Button
+	Private Button4 As Button
+	Private Button5 As Button
+	Private Button1 As Button
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	MainForm = Form1
+	MainForm.RootPane.LoadLayout("main") 'Load the layout file.
+	'MainForm.Show
+	login.Show
+End Sub
+
+Public Sub Show
+	MainForm.Show
+	Log("欢迎，"&File.ReadString(File.DirApp,"user"))
+End Sub
+
+Sub Button5_MouseClicked (EventData As MouseEvent)
+	If fx.Msgbox2(MainForm,"请选择是参加还是新建翻译项目：","","参加","","新建",fx.MSGBOX_CONFIRMATION)=fx.DialogResponse.POSITIVE Then
+		
+		workshopParticipate.Show
+	Else
+		workshop.Show
+	End If
+End Sub
+
+Sub Button4_MouseClicked (EventData As MouseEvent)
+	Dim list1 As List
+	list1=File.ReadList(File.DirApp,"user")
+    If list1.Get(2)="student" Then
+	    homeworkStudent.show
+	Else
+	    homeworkTeacher.Show
+	End If
+End Sub
+
+Sub Button3_MouseClicked (EventData As MouseEvent)
+	textListOnline.textType="StrategiesAndMethods"
+	textListOnline.Show
+End Sub
+
+Sub Button2_MouseClicked (EventData As MouseEvent)
+	textListOnline.textType="Corpus"
+	textListOnline.Show
+End Sub
+
+
+Sub Button1_MouseClicked (EventData As MouseEvent)
+	If fx.Msgbox2(MainForm,"请选择要上传的类型","","文本大全","","翻译策略与技巧",fx.MSGBOX_CONFIRMATION)=fx.DialogResponse.POSITIVE Then
+		textList.textType="Corpus"
+	    textList.Show
+	Else
+		textList.textType="StrategiesAndMethods"
+	    textList.Show
+	End If
+End Sub

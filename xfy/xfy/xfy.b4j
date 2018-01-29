@@ -1,0 +1,161 @@
+﻿Version=4.7
+AppType=JavaFX
+NumberOfModules=17
+Module1=login
+Module2=category
+Module3=addCorpusByCategoryStep1
+Module4=addCorpusByCategoryStep2
+Module5=listContentInCategory
+Module6=viewContent
+Module7=viewTerms
+Module8=strategyAndMethod
+Module9=listStrategiesAndMethods
+Module10=viewStrategy
+Module11=modifyText
+Module12=loadExerciseDone
+Module13=loadText
+Module14=exercise
+Module15=viewExercise
+Module16=addStrategyStep2
+Module17=addStrategyStep1
+Build1=Default,com.xulihang.xfy
+NumberOfFiles=27
+File1=addCorpusByCategory.bjl
+File2=addCorpusByCategory2.bjl
+File3=addCorpusByCategory2P.bjl
+File4=addStrategy.bjl
+File5=addTerms.bjl
+File6=addTermsList.bjl
+File7=annotationList.bjl
+File8=category.bjl
+File9=exercise.bjl
+File10=inputReplace.bjl
+File11=inputTitle.bjl
+File12=listContentInCategory.bjl
+File13=loadExerciseDone.bjl
+File14=loadText.bjl
+File15=login.bjl
+File16=main.bjl
+File17=modifyText.bjl
+File18=setStyle.bjl
+File19=strategyAndMethod.bjl
+File20=style.css
+File21=TextArea.bjl
+File22=viewContent.bjl
+File23=viewContentP.bjl
+File24=viewExercise.bjl
+File25=viewStrategy.bjl
+File26=viewTerms.bjl
+File27=WebView.bjl
+NumberOfLibraries=7
+Library1=jcore
+Library2=jfx
+Library3=jmsgboxes
+Library4=json
+Library5=apachestringutilsb4j
+Library6=javaobject
+Library7=jshell
+@EndOfDesignText@
+#Region Project Attributes 
+	#MainFormWidth: 600
+	#MainFormHeight: 400 
+#End Region
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Private Label1 As Label
+	Private Button1 As Button
+	Private Button2 As Button
+	Private Button3 As Button
+	Private Label2 As Label
+    Public NativeMe As JavaObject	
+	Public result As Int '可比为-2，平行为-1
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	MainForm = Form1
+	MainForm.RootPane.LoadLayout("main") 'Load the layout file.
+	NativeMe= Me
+	login.Show
+	
+End Sub
+
+Public Sub Show
+	MainForm.Show
+	Label1.Text="欢迎，"&File.ReadString(File.DirApp,"user")
+End Sub
+
+Sub Button3_MouseClicked (EventData As MouseEvent)
+	exercise.Show
+End Sub
+
+Sub Button2_MouseClicked (EventData As MouseEvent)
+	strategyAndMethod.Show
+End Sub
+
+Sub Button1_MouseClicked (EventData As MouseEvent)
+	Dim msgbox As Msgboxes	
+	result=msgbox.Show2("查看平行文本还是可比文本？","","平行文本","","可比文本") '可比为-2，平行为-1
+	category.Show
+End Sub
+
+
+
+Sub Button1_MouseMoved (EventData As MouseEvent)
+	Label2.Text="收集各类文本以供翻译参考"
+End Sub
+
+Sub Button3_MouseMoved (EventData As MouseEvent)
+	Label2.Text="做作业"
+End Sub
+
+Sub Button2_MouseMoved (EventData As MouseEvent)
+	Label2.Text="基于文本讲解翻译理论与技巧"
+End Sub
+
+#If JAVA
+private static boolean isChinese(char c) {
+
+    Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+
+    if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+
+            || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
+
+            || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+
+            || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+
+
+// 完整的判断中文汉字和符号
+
+public static boolean isChinese(String strName) {
+
+    char[] ch = strName.toCharArray();
+
+    for (int i = 0; i < ch.length; i++) {
+
+        char c = ch[i];
+
+        if (isChinese(c)) {
+
+            return true;
+
+        }
+
+    }
+
+    return false;
+
+}
+#End If
